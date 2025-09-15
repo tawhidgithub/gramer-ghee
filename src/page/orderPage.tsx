@@ -4,18 +4,31 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+};
+
+type CustomerInfo = {
+  phone: string;
+  name: string;
+  address: string;
+};
+
 const OrderPage = () => {
-  const [products] = useState([
+  const [products] = useState<Product[]>([
     { id: 1, name: "Premium Ghee 500ml", price: 800, image: "🥛" },
     { id: 2, name: "Premium Ghee 1L", price: 1500, image: "🥛" },
     { id: 3, name: "Organic Ghee 500ml", price: 1200, image: "🥛" },
   ]);
 
-  const [quantities, setQuantities] = useState(
+  const [quantities, setQuantities] = useState<Record<number, number>>(
     products.reduce((acc, product) => ({ ...acc, [product.id]: 0 }), {})
   );
 
-  const [customerInfo, setCustomerInfo] = useState({
+  const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
     phone: "",
     name: "",
     address: "",
@@ -23,7 +36,7 @@ const OrderPage = () => {
 
   const [paymentMethod, setPaymentMethod] = useState("cod");
 
-  const updateQuantity = (productId, change) => {
+  const updateQuantity = (productId: number, change: number) => {
     setQuantities((prev) => ({
       ...prev,
       [productId]: Math.max(0, prev[productId] + change),
@@ -40,11 +53,37 @@ const OrderPage = () => {
     return products.filter((product) => quantities[product.id] > 0);
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = <K extends keyof CustomerInfo>(
+    field: K,
+    value: CustomerInfo[K]
+  ) => {
     setCustomerInfo((prev) => ({
       ...prev,
       [field]: value,
     }));
+  };
+
+  const handlePlaceOrder = () => {
+    const orderNumber = "ORD-" + Math.floor(100000 + Math.random() * 900000);
+
+    const orderDetails = {
+      orderNumber,
+      customerName: customerInfo.name,
+      customerPhone: customerInfo.phone,
+      customAddress: customerInfo.address,
+      paymentMethod,
+      items: getOrderedItems()
+        .map(
+          (product) =>
+            `${product.name} × ${quantities[product.id]} = ৳${
+              product.price * quantities[product.id]
+            }`
+        )
+        .join("\n"),
+      total: `৳${getTotalPrice()}`,
+    };
+
+    console.log("Product Details:", orderDetails);
   };
 
   return (
@@ -262,7 +301,10 @@ const OrderPage = () => {
                     </div>
                   </div>
 
-                  <Button className="w-full mt-6 h-12 md:h-14 text-lg bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold">
+                  <Button
+                    onClick={handlePlaceOrder}
+                    className="w-full mt-6 h-12 md:h-14 text-lg bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold"
+                  >
                     Place Order - ৳{getTotalPrice().toLocaleString()}
                   </Button>
                 </>
