@@ -31,7 +31,7 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col items-center md:items-center sm:items-start sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
           <p className="text-xl text-gray-600">
@@ -39,13 +39,13 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="space-y-8">
+        <div className="grid lg:grid-cols-2 gap-12 justify-center md:grid-row sm:justify-start ">
+          <div className="space-y-8 text-center sm:text-left">
             <h3 className="text-2xl font-bold text-green-800 mb-6">
               Get in Touch
             </h3>
 
-            <div className="space-y-6">
+            <div className="space-y-6 text-center sm:text-left">
               <div className="flex items-start space-x-4">
                 <div>
                   <h4 className="font-semibold text-gray-900 ">Address</h4>
@@ -56,18 +56,14 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900">Phone</h4>
-                  <p className="text-gray-600">+8801963151179</p>
-                </div>
+              <div>
+                <h4 className="font-semibold text-gray-900">Phone</h4>
+                <p className="text-gray-600">+8801963151179</p>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900">Email</h4>
-                  <p className="text-gray-600">gramerghee@gmail.com</p>
-                </div>
+              <div>
+                <h4 className="font-semibold text-gray-900">Email</h4>
+                <p className="text-gray-600">gramerghee@gmail.com</p>
               </div>
             </div>
             <div className="bg-green-50 p-6 rounded-lg shadow-md">

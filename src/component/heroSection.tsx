@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section
       id="home"
-      className="hero-gradient min-h-screen flex items-center pt-16"
+      className="hero-gradient min-h-screen flex w-full items-center pt-16 px-4 sm:px-6 lg:px-8"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
@@ -24,7 +27,12 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="ghee-gradient text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              <button
+                onClick={() => {
+                  navigate("/order-page");
+                }}
+                className="ghee-gradient text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              >
                 Order Now
               </button>
               <button className="border-2 border-green-700 text-green-700 px-8 py-4 rounded-full font-semibold text-lg hover:bg-green-700 hover:text-white transition-all duration-300">

@@ -36,7 +36,7 @@ const HomePage = () => {
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full overflow-x-hidden">
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}

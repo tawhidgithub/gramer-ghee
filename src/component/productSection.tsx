@@ -95,7 +95,7 @@ const ProductsSection: FC<ProductsSectionProps> = () => {
             Discover our premium range of pure ghee products
           </p>
         </div>
-        <div className="flex flex-row gap-9">
+        <div className="flex flex-col gap-9 sm:flex-row flex-wrap justify-center">
           {product.map((item, index) => {
             return (
               <div className="flex justify-center" key={index}>

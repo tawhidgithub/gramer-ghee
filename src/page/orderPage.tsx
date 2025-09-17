@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
+import jarImage from "../assets/productv2.png";
 
 type Product = {
   id: number;
@@ -19,9 +20,9 @@ type CustomerInfo = {
 
 const OrderPage = () => {
   const [products] = useState<Product[]>([
-    { id: 1, name: "Premium Ghee 500ml", price: 800, image: "🥛" },
-    { id: 2, name: "Premium Ghee 1L", price: 1500, image: "🥛" },
-    { id: 3, name: "Organic Ghee 500ml", price: 1200, image: "🥛" },
+    { id: 1, name: "Premium Ghee 500ml", price: 180, image: jarImage },
+    { id: 2, name: "Premium Ghee 1L", price: 360, image: jarImage },
+    { id: 3, name: "Organic Ghee 500ml", price: 810, image: jarImage },
   ]);
 
   const [quantities, setQuantities] = useState<Record<number, number>>(
@@ -64,6 +65,17 @@ const OrderPage = () => {
   };
 
   const handlePlaceOrder = () => {
+    if (
+      !customerInfo.phone.trim() ||
+      !customerInfo.name.trim() ||
+      !customerInfo.address.trim()
+    ) {
+      alert(
+        "⚠️ Please fill in your Name, Phone, and Address before placing an order."
+      );
+      return;
+    }
+
     const orderNumber = "ORD-" + Math.floor(100000 + Math.random() * 900000);
 
     const orderDetails = {
@@ -130,7 +142,9 @@ const OrderPage = () => {
                 >
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-4 flex-1">
-                      <div className="text-4xl">{product.image}</div>
+                      <div className="size-30">
+                        <img src={product.image} className="object-contain" />
+                      </div>
                       <div className="text-center sm:text-left">
                         <h3 className="text-lg md:text-xl font-semibold text-gray-800">
                           {product.name}
@@ -244,7 +258,7 @@ const OrderPage = () => {
                   💰 Cash on Delivery
                 </label>
               </div>
-              <div className="flex items-center space-x-3">
+              {/* <div className="flex items-center space-x-3">
                 <input
                   type="radio"
                   id="stripe"
@@ -260,7 +274,7 @@ const OrderPage = () => {
                 >
                   💳 Stripe Payment
                 </label>
-              </div>
+              </div> */}
             </div>
           </div>
 
