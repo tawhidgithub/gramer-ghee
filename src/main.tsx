@@ -1,21 +1,14 @@
 import { createRoot } from "react-dom/client";
 import "./global.css";
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import { HashRouter, Route, Routes } from "react-router";
 import HomePage from "./page/homePage.tsx";
 import OrderPage from "./page/orderPage.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "order-page",
-    element: <OrderPage />,
-  },
-]);
-
 createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />
+  <HashRouter>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/order-page" element={<OrderPage />} />
+    </Routes>
+  </HashRouter>
 );

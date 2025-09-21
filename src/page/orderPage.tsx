@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { Minus, Plus } from "lucide-react";
 import jarImage from "../assets/productv2.png";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
+import logo from "../assets/logo.png";
 
 import emailjs from "@emailjs/browser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,7 +33,7 @@ type CustomerInfo = {
 const OrderPage = () => {
   const [products] = useState<Product[]>([
     { id: 1, name: "Premium Ghee 100ml", price: 180, image: jarImage },
-    { id: 2, name: "Premium Ghee 200L", price: 360, image: jarImage },
+    { id: 2, name: "Premium Ghee 250ml", price: 450, image: jarImage },
     { id: 3, name: "Organic Ghee 500ml", price: 810, image: jarImage },
   ]);
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
@@ -52,6 +53,27 @@ const OrderPage = () => {
   const [quantities, setQuantities] = useState<Record<number, number>>(
     products.reduce((acc, product) => ({ ...acc, [product.id]: 0 }), {})
   );
+
+  useEffect(() => {
+    console.log("Shipping cose :", shippingCost);
+  }, [shippingCost]);
+
+  useEffect(() => {
+    if (isCustom === "constantJur") {
+      // reset slider
+      setSliderValue(100);
+
+      // keep product quantities as they are, OR reset if you want:
+      setQuantities((prev) =>
+        Object.fromEntries(Object.keys(prev).map((id) => [Number(id), 0]))
+      );
+    } else {
+      // custom selected → reset product quantities
+      setQuantities((prev) =>
+        Object.fromEntries(Object.keys(prev).map((id) => [Number(id), 0]))
+      );
+    }
+  }, [isCustom]);
 
   const priceParGram = 1800 / 1000;
 
@@ -90,10 +112,10 @@ const OrderPage = () => {
 
   const getTotalPrice = () => {
     const productTotal = products.reduce((total, product) => {
-      return total + product.price * quantities[product.id] + shippingCost;
+      return total + product.price * quantities[product.id];
     }, 0);
 
-    return productTotal + getSliderPrice(); // 👈 add slider price
+    return productTotal + getSliderPrice() + shippingCost; // 👈 add slider price
   };
 
   const getOrderedItems = () => {
@@ -182,13 +204,14 @@ const OrderPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 py-4 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         {/* Header */}
-        <div className="bg-green-600 text-white py-6 px-6">
-          <div className="flex items-center justify-center gap-4">
-            {/* Replace this div with your actual logo */}
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-green-600 text-2xl font-bold">
-              GG
-            </div>
-            <span className="text-2xl md:text-3xl font-bold">Gramer Ghee</span>
+        <div className="bg-green-600 flex justify-center text-white py-6 px-6">
+          <div className="flex items-center space-x-3 mb-0">
+            <img
+              src={logo}
+              alt="Gramer Ghee"
+              className="w-30 h-30 bg-amber-50 rounded-full"
+            />
+            <span className="text-2xl font-bold">Gramer Ghee</span>
           </div>
         </div>
 

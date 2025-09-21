@@ -28,9 +28,9 @@ const ProductsSection: FC<ProductsSectionProps> = () => {
     {
       id: 2,
       name: "Adaray Ghee",
-      price: 360,
-      originalPrice: 380,
-      size: "200g",
+      price: 450,
+      originalPrice: 470,
+      size: "250g",
       discount: "0%",
 
       saveTaka: 20,
