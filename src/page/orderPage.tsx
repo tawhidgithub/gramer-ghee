@@ -233,7 +233,7 @@ const OrderPage = () => {
                 htmlFor="cod"
                 className="text-lg font-medium text-gray-700"
               >
-                Jur
+                Readymade
               </label>
             </div>
             <div className="flex items-center space-x-3">
