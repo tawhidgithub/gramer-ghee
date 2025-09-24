@@ -14,6 +14,7 @@ import {
   faFacebookMessenger,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
+import { useNavigate } from "react-router";
 
 type Product = {
   id: number;
@@ -31,6 +32,7 @@ type CustomerInfo = {
 };
 
 const OrderPage = () => {
+  const navigate = useNavigate();
   const [products] = useState<Product[]>([
     { id: 1, name: "Premium Ghee 100ml", price: 180, image: jarImage },
     { id: 2, name: "Premium Ghee 250ml", price: 450, image: jarImage },
@@ -188,6 +190,7 @@ const OrderPage = () => {
       .then(
         () => {
           alert("✅ Order placed & email sent!");
+          navigate("/");
         },
         (error: { text: string }) => {
           console.error("❌ FAILED...", error.text);
