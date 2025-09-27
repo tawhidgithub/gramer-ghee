@@ -36,7 +36,7 @@ const OrderPage = () => {
   const [products] = useState<Product[]>([
     { id: 1, name: "Premium Ghee 100ml", price: 180, image: jarImage },
     { id: 2, name: "Premium Ghee 250ml", price: 450, image: jarImage },
-    { id: 3, name: "Organic Ghee 500ml", price: 810, image: jarImage },
+    { id: 3, name: "Organic Ghee 500ml", price: 900, image: jarImage },
   ]);
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
     phone: "",

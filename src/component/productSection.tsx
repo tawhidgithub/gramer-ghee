@@ -47,12 +47,12 @@ const ProductsSection: FC<ProductsSectionProps> = () => {
     {
       id: 3,
       name: "Adaray Ghee",
-      price: 810,
+      price: 900,
       originalPrice: 900,
       size: "500g",
       image: img,
-      saveTaka: 90,
-      discount: "5%",
+      saveTaka: 0,
+      discount: "0%",
 
       description:
         "Premium pure cow milk ghee made with traditional methods. Rich, aromatic, and perfect for all your cooking needs.",
